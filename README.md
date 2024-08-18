@@ -7,7 +7,7 @@
 4. Файл README.md 
 
 ## Установка проекта
-Клонирование проекта из [GitHub](https://github.com/Sweerx/Homework_4_OOP) по HTTPS-токену или SSH-ключу
+Клонирование проекта из [GitHub](https://github.com/Nericrash/lesson-14) по HTTPS-токену или SSH-ключу
 
 Устанавливаем зависимости ```pip install -r requirements.txt```
 
