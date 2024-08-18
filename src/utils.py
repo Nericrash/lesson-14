@@ -3,6 +3,7 @@ import json
 
 class Product:
     """Класс для работы с продуктами"""
+
     name = str
     description = str
     price = float
@@ -17,6 +18,7 @@ class Product:
 
 class Category:
     """Класс для работы с категориями"""
+
     name = str
     description = str
     products = list
@@ -33,7 +35,7 @@ class Category:
 
 
 def get_products_of_json(file: str) -> list:
-    """ Считывание данных из json-файла по переданному пути и конвертация их в экземпляры классов """
+    """Считывание данных из json-файла по переданному пути и конвертация их в экземпляры классов"""
     with open(f"../data/{file}", encoding="utf-8") as f:
         data = json.load(f)
 
