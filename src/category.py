@@ -1,3 +1,5 @@
+from typing import Any
+
 from src.product import Product
 
 
@@ -24,22 +26,22 @@ class Category:
         Category.product_count += len(products)
 
     @property
-    def products(self) -> str:
-        result = ""
-        for el in self.__products:
-            result += f"{el.name}, {el.price} руб. Остаток: {el.quantity} шт.\n"
-        return result
+    def products(self) -> list[Any]:
+        products_list = []
+        for product in self.__products:
+            products_list.append(product)
+        return products_list
 
     @property
-    def products_list(self) -> list:
-        """
-        Геттер атрибута __products - вовзращает список продуктов в виде списка
-        """
-        return self.__products
+    def products_list(self) -> str:
+        product_list = ""
+        for product in self.__products:
+            product_list += f"{str(product)}\n"
+        return product_list
 
     def add_product(self, new_product: Product) -> None:
         """
         Добавляем новый продукт в список продуктов
         """
         self.__products.append(new_product)
-        Category.category_count += 1
+        Category.product_count += 1

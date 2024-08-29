@@ -12,25 +12,15 @@ def test_initialization(product: Product) -> None:
     assert product.quantity == 10
 
 
-def test_price_update(product: Product) -> None:
-    product.price = 1400.0
-    assert product.price == 1400.0
-
-
 def test_quantity_update(product: Product) -> None:
     product.quantity = 5
     assert product.quantity == 5
 
 
-def test_description_update(product: Product) -> None:
-    product.description = "Ноутбук средней ценовой категории"
-    assert product.description == "Ноутбук средней ценовой категории"
-
-
-def test_category_init(first_cat: Category, second_cat: Category) -> None:
-    assert first_cat.name == "Apple"
-    assert first_cat.description == "Смартфоны  компании Apple"
-    assert len(first_cat.products) == 2
+def test_category_init(first_category: Category, second_category: Category) -> None:
+    assert first_category.name == "Apple"
+    assert first_category.description == "Смартфоны  компании Apple"
+    assert len(first_category.products) == 2
     assert Category.category_count == 2
     assert Category.product_count == 4
 

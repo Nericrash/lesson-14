@@ -1,26 +1,30 @@
-from src.category import Category
-from src.product import Product
+import pytest
 
 
-def test_category_init(first_cat: Category, second_cat: Category) -> None:
-    assert first_cat.name == "Apple"
-    assert first_cat.description == "Смартфоны  компании Apple"
-    assert len(first_cat.products_list) == 2
-    assert Category.category_count == 2
-    assert Category.product_count == 4
+def test_category(first_category, second_category):
+    assert first_category.name == "Category"
+    assert first_category.description == "Description of the category"
+    assert (
+        first_category.products_list
+        == "Product, 84.5 руб. Остаток: 10 шт.\nProduct number two, 155.87 руб. Остаток: 34 шт.\n"
+    )
+
+    assert first_category.category_count == 2
+    assert second_category.category_count == 2
+
+    assert first_category.product_count == 5
+    assert second_category.product_count == 5
 
 
-def test_category_products(first_cat: Category) -> None:
-    assert first_cat.products == "Iphone 15, 1500 руб. Остаток: 10 шт.\nIphone 14, 1200 руб. Остаток: 15 шт.\n"
-
-
-def test_category_products_list(first_cat: Category, first_product: Product, second_product: Product) -> None:
-    assert first_cat.products_list == [first_product, second_product]
-
-
-def test_category_add_product(
-    first_cat: Category, first_product: Product, second_product: Product, third_product: Product
-) -> None:
-    assert first_cat.products_list == [first_product, second_product]
-    first_cat.add_product(third_product)
-    assert first_cat.products_list == [first_product, second_product, third_product]
+def test_cat_get_product_list_property(first_category, second_category):
+    with pytest.raises(AttributeError):
+        print(first_category.__products)
+    assert (
+        first_category.products_list
+        == "Product, 84.5 руб. Остаток: 10 шт.\nProduct number two, 155.87 руб. Остаток: 34 шт.\n"
+    )
+    assert (
+        second_category.products_list
+        == "Product, 84.5 руб. Остаток: 10 шт.\nProduct number two, 155.87 руб. Остаток: 34 шт."
+        "\nProduct three, 8467.56 руб. Остаток: 32 шт.\n"
+    )

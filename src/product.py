@@ -1,55 +1,77 @@
-from typing import Any
-
-
 class Product:
-    """
-    Класс продуктов интернет магазина
-    """
+    """Продукт"""
 
     name: str
     description: str
-    __price: float
+    price: float
     quantity: int
-    products_list: list = []
 
-    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-        """
-        Конструктор объектов
-        """
+    def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
-        Product.products_list.append(self)
+
+    def __str__(self):
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        return self.quantity * self.price + other.quantity * other.price
 
     @classmethod
-    def new_product(cls, product: dict) -> Any:
-        for prod in cls.products_list:
-            if prod.name == product["name"]:
-                prod.price = max(prod.price, product["price"])
-                prod.quantity += product["quantity"]
-                return prod
-            else:
-                new_prod = cls(product["name"], product["description"], product["price"], product["quantity"])
-                return new_prod
+    def new_product(cls, new_product: dict):
+        """Взвращает созданный объект класса Product из параметров товара в словаре"""
+        name = new_product["name"]
+        description = new_product["description"]
+        price = new_product["price"]
+        quantity = new_product["quantity"]
+        return cls(name, description, price, quantity)
 
     @property
-    def price(self) -> float:
-        """
-        Геттер атрибута __price - возвращает цену продукта
-        """
+    def price(self):
         return self.__price
 
     @price.setter
-    def price(self, new_price: float) -> None:
-        """
-        Сеттер атрибута __price - обновляет цену продукта, если новая цена ниже старой запрашивается подтверждение
-        """
-        if new_price > 0:
-            if new_price < self.__price:
-                if input("Вы уверены, что хотите снизить цену? Введите 'y' - если да, 'n' - если нет: ") == "y":
-                    self.__price = new_price
-            else:
-                self.__price = new_price
+    def price(self, value):
+        if value <= 0:
+            print("Цена не должна быть нулевая или орицательная")
         else:
-            print("Цена не должна быть нулевая или отрицательная")
+            self.__price = value
+
+            from src.category import Category
+            from src.product import Product
+
+            class ProductIterator:
+                """Класс для итерации товаров одной категории"""
+
+                def __init__(self, category_obj):
+                    self.category = category_obj
+                    self.index = 0
+
+                def __iter__(self):
+                    return self
+
+                def __next__(self):
+                    if self.index < len(self.category.products):
+                        prod = self.category.products[self.index]
+                        self.index += 1
+                        return prod
+                    else:
+                        raise StopIteration
+
+            if __name__ == "__main__":
+                product1 = Product(
+                    "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5
+                )
+                product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+                product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+                category1 = Category(
+                    "Смартфоны",
+                    "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+                    [product1, product2, product3],
+                )
+
+                iterator = ProductIterator(category1)
+                for product in iterator:
+                    print(product)
