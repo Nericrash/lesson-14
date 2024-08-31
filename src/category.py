@@ -1,33 +1,37 @@
-class Product:
-    """Продукт"""
+from typing import Any
+
+from src.product import Product
+
+
+class Category:
+    """Категория товара"""
+
+    category_count = 0
+    product_count = 0
 
     name: str
     description: str
-    price: float
-    quantity: int
+    products: list
 
-    def __init__(self, name, description, price, quantity):
+    def __init__(self, name, description, products):
         self.name = name
         self.description = description
-        self.__price = price
-        self.quantity = quantity
+        self.__products = products
+        Category.category_count += 1
+        Category.product_count += len(products)
+        print(Category.product_count)
 
-    @classmethod
-    def new_product(cls, new_product: dict):
-        """Взвращает созданный объект класса Product из параметров товара в словаре"""
-        name = new_product["name"]
-        description = new_product["description"]
-        price = new_product["price"]
-        quantity = new_product["quantity"]
-        return cls(name, description, price, quantity)
+    def add_product(self, product: Product) -> Any:
+        self.__products.append(product)
+        Category.product_count += 1
 
     @property
-    def price(self):
-        return self.__price
+    def get_product_list(self) -> str:
+        product_list = ""
+        for product in self.__products:
+            product_list += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+        return product_list
 
-    @price.setter
-    def price(self, value):
-        if value <= 0:
-            print("Цена не должна быть нулевая или орицательная")
-        else:
-            self.__price = value
+
+# result = Category("Product", "Description", ["product1", "product2", "product3"])
+# print(result)
