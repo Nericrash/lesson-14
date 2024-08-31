@@ -1,33 +1,74 @@
-from typing import Any
+import pytest
 
+from src.category import Category
 from src.product import Product
 
 
-class Category:
-    """Категория товара"""
+@pytest.fixture
+def first_product():
+    return Product(
+        name="Product",
+        description="Description of the product",
+        price=84.50,
+        quantity=10,
+    )
 
-    category_count = 0
-    product_count = 0
 
-    name: str
-    description: str
-    products: list
+@pytest.fixture
+def second_product():
+    return Product(
+        name="Product number two",
+        description="Description of the product number two",
+        price=155.87,
+        quantity=34,
+    )
 
-    def __init__(self, name, description, products):
-        self.name = name
-        self.description = description
-        self.__products = products
-        Category.category_count += 1
-        Category.product_count += len(products)
-        print(Category.product_count)
 
-    def add_product(self, product: Product) -> Any:
-        self.__products.append(product)
-        Category.product_count += 1
+@pytest.fixture
+def first_category():
+    return Category(
+        name="Category",
+        description="Description of the category",
+        products=[
+            Product(
+                name="Product",
+                description="Description of the product",
+                price=84.50,
+                quantity=10,
+            ),
+            Product(
+                name="Product number two",
+                description="Description of the product number two",
+                price=155.87,
+                quantity=34,
+            ),
+        ],
+    )
 
-    @property
-    def get_product_list(self) -> str:
-        product_list = ""
-        for product in self.__products:
-            product_list += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
-        return product_list
+
+@pytest.fixture
+def second_category():
+    return Category(
+        name="Category number two",
+        description="Description of the category number two",
+        products=[
+            Product(
+                name="Product",
+                description="Description of the product",
+                price=84.50,
+                quantity=10,
+            ),
+            Product(
+                name="Product number two",
+                description="Description of the product number two",
+                price=155.87,
+                quantity=34,
+            ),
+            Product(
+                name="Product three",
+                description="Description of the product three",
+                price=8467.56,
+                quantity=32,
+            ),
+        ],
+    )
