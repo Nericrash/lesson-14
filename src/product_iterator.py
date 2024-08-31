@@ -37,4 +37,3 @@ if __name__ == "__main__":
     iterator = ProductIterator(category1)
     for product in iterator:
         print(product)
-        
