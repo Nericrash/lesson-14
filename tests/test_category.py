@@ -34,6 +34,7 @@ def test_category_str(first_category, second_category):
     assert str(first_category) == "Category, количество продуктов: 44 шт."
     assert str(second_category) == "Category number two, количество продуктов: 76 шт."
 
+
 def test_add_product(first_category, smartphone1, lawn_grass1):
     first_category.add_product(smartphone1)
     assert first_category.products[-1].name == "Samsung Galaxy S23 Ultra"
