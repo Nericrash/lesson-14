@@ -13,7 +13,8 @@ if __name__ == "__main__":
         256,
         "Серый",
     )
-    smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2, "15", 512, "Gray space")
+    smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, 98.2,
+                             "15", 512, "Gray space")
     smartphone3 = Smartphone(
         "Xiaomi Redmi Note 11",
         "1024GB, Синий",
@@ -99,8 +100,10 @@ if __name__ == "__main__":
     else:
         print("Не возникла ошибка TypeError при попытке сложения")
 
-    category_smartphones = Category("Смартфоны", "Высокотехнологичные смартфоны", [smartphone1, smartphone2])
-    category_grass = Category("Газонная трава", "Различные виды газонной травы", [grass1, grass2])
+    category_smartphones = Category("Смартфоны", "Высокотехнологичные смартфоны",
+                                    [smartphone1, smartphone2])
+    category_grass = Category("Газонная трава", "Различные виды газонной травы",
+                              [grass1, grass2])
 
     category_smartphones.add_product(smartphone3)
 
