@@ -151,5 +151,5 @@ def without_product():
 
 
 @pytest.fixture
-def productiterator(first_category):
+def product_iterator(first_category):
     return ProductIterator(first_category)

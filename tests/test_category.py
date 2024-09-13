@@ -60,11 +60,11 @@ def test_add_smartphone(first_category, smartphone1):
     first_category.add_product = smartphone1
 
 
-def test_ProductIterator(productiterator):
-    iter(productiterator)
-    assert productiterator.index == 0
-    assert next(productiterator).name == "Product"
-    assert next(productiterator).name == "Product number two"
+def test_product_iterator(product_iterator):
+    iter(product_iterator)
+    assert product_iterator.index == 0
+    assert next(product_iterator).name == "Product"
+    assert next(product_iterator).name == "Product number two"
 
     with pytest.raises(StopIteration):
-        next(productiterator)
+        next(product_iterator)
