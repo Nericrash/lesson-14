@@ -15,6 +15,7 @@ class Product(BaseProduct, MixinPrint):
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
@@ -40,6 +41,6 @@ class Product(BaseProduct, MixinPrint):
     @price.setter
     def price(self, value):
         if value <= 0:
-            print("Цена не должна быть нулевая или орицательная")
+            print("Цена не должна быть нулевая или отрицательная")
         else:
             self.__price = value
