@@ -1,9 +1,10 @@
 from typing import Any
 
+from src.base import Base
 from src.product import Product
 
 
-class Category:
+class Category(Base):
     """Категория товара"""
 
     category_count = 0
@@ -20,9 +21,6 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(products)
         print(Category.product_count)
-
-    # def __str__(self):
-    #     return f"{self.name}, количество продуктов: {len(self.__products)} шт."
 
     def __str__(self):
         all_quantity = 0
@@ -50,3 +48,11 @@ class Category:
         for product in self.__products:
             products_list.append(product)
         return products_list
+
+    def middle_price(self):
+        try:
+            return sum(product.price for product in self.__products) / len(
+                self.__products
+            )
+        except ZeroDivisionError:
+            return 0

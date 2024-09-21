@@ -153,3 +153,12 @@ def without_product():
 @pytest.fixture
 def product_iterator(first_category):
     return ProductIterator(first_category)
+
+
+@pytest.fixture
+def category_without_products():
+    return Category(
+        name="Category without products",
+        description="Description of the category without products",
+        products=[],
+    )
